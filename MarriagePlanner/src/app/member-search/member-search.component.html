@@ -1,0 +1,210 @@
+<div class="container">
+    <app-nav-Adminmenu></app-nav-Adminmenu>
+    <header>
+        <h2><a href="#" rel="bookmark" title="Permalink to this POST TITLE">Member Search</a></h2>
+    </header>
+
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-md-2"><span class="PageTitle">{{PageTitle}}</span></div>
+            <div class="col-md-2">
+                <ngx-spinner bdColor="rgba(51, 51, 51, 0.8)" size="default" type="ball-spin-clockwise">
+                    <p style="color:white">Processing.. </p>
+                </ngx-spinner>
+            </div>
+
+            <div class="col-md-8" style="text-align: right;"><span style="color: blue;">{{SuccessMassage}}</span><span
+                    style="color:red;">{{errorMessage}}</span></div>
+        </div>
+        <div class="panel panel-default">
+            <form [formGroup]="UserForm" (ngSubmit)="onFormSubmit()">
+                <div class="panel-body">
+
+
+                    <div class="row">
+                        <br>
+
+                        <div class="col-md-12">
+                            <div class="row">
+                                <div class="form-group col-md-3">
+                                    <label for="Name">Name</label>
+                                    <input type="text" class="form-control"formControlName="Name">
+                                </div>
+                                <div class="form-group col-md-2">
+                                    <label for="Sex">Sex</label>
+                                    <select class="form-control" formControlName="Sex" class="form-control">
+                                        <option> </option>
+                                        <option *ngFor="let sex of SexArray"
+                                            value="{{sex.CodeName}}" [disabled]="sex.Status=='I'">
+                                            {{sex.CodeDesc}} </option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-2">
+                                    <label for="Religion">Religion</label>
+                                    <select class="form-control" formControlName="Religion" class="form-control">
+                                        <option> </option>
+                                        <option *ngFor="let Religion of ReligionArray"
+                                            value="{{Religion.CodeName}}" [disabled]="Religion.Status=='I'">
+                                            {{Religion.CodeDesc}} </option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-2">
+                                    <label for="Caste">Caste</label>
+                                    <select class="form-control" formControlName="Caste" class="form-control">
+                                        <option> </option>
+                                        <option *ngFor="let caste of CasteArray"
+                                            value="{{caste.CodeName}}" [disabled]="caste.Status=='I'">
+                                            {{caste.CodeDesc}} </option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-2">
+                                    <label for="Phone">Phone</label>
+                                    <input type="text" class="form-control"formControlName="Phone">
+                                </div>
+                                <div class="form-group col-md-2">
+                                    <label for="Zodiac">Zodiac</label>
+                                    <select class="form-control" formControlName="Zodiac" class="form-control">
+                                        <option> </option>
+                                        <option *ngFor="let Zodiac of ZodiacArray"
+                                            value="{{Zodiac.CodeName}}" [disabled]="Zodiac.Status=='I'">
+                                            {{Zodiac.CodeDesc}} </option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-2">
+                                    <label for="Status">Status</label>
+                                    <select class="form-control" formControlName="Status" class="form-control">
+                                        <option> </option>
+                                        <option *ngFor="let Status of UserStatus"
+                                            value="{{Status.CodeName}}" [disabled]="Status.Status=='I'">
+                                            {{Status.CodeDesc}} </option>
+                                    </select>
+
+                                </div>
+                               
+                            </div>
+                            <div class="row">
+                                
+
+
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <div class="row">
+
+
+                        <div class="form-group col-md-5">
+
+
+                        </div>
+
+                        <div class="form-group col-md-1" style="padding-top:22px;">
+                            <button type="button" (click)="onOpenNew()" style="width:90px;"
+                                class="btn btn-success">New</button>
+                        </div>
+                        <div class="form-group col-md-1" style="padding-top:22px;">
+                            <button type="button" style="width:90px;" class="btn btn-primary"
+                                (click)="onSearch()">Search</button>
+                        </div>
+
+                        <div class="form-group col-md-1" style="padding-top:22px;" *ngIf="this.isDownload">
+                            <button type="button" (click)="downloadCSV()" style="width:90px;"
+                                class="btn btn-dark">Download</button>
+                        </div>
+                        <div class="form-group col-md-1" style="padding-top:22px;">
+                            <button type="button" (click)="onBack()" style="width:90px;"
+                                class="btn btn-warning ">Home</button>
+                        </div>
+
+
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div>
+
+                                <div class="table-responsive">
+
+                                    <table class="table table-striped table-sm hover" style="width:100%">
+                                        <thead class="bg-primary">
+                                            <tr>
+                                                <th></th>
+
+                                                <!--<th width="10%"></th>-->
+                                                <th class="hidden">#ID</th>
+                                                <th>Name</th>
+                                                <th>Sex</th>
+                                                <th>Religion</th>
+                                                <th>Caste</th>
+                                                <th>Phone</th>
+                                                <th>Zodiac</th>
+                                                <th>Status</th>
+                                              
+                                            </tr>
+                                        </thead>
+
+                                        <tbody>
+                                            <tr
+                                                *ngFor="let item of ItemsArray | paginate:{itemsPerPage: pagecount, currentPage:p} let i = index">
+                                                <td>
+                                                    <button [disabled]="item.inedit" class="btn btn-warning"
+                                                        (click)="onEditClick($event, ((p-1)*pagecount)+i)"
+                                                        data-toggle="modal" data-target="#editModal"><span
+                                                            class="fa fa-edit"></span></button>
+
+                                                </td>
+
+
+                                                <td class="hidden">
+                                                    <span>{{item.ID}}</span>
+                                                </td>
+                                                <td>
+                                                    <span>{{item.Name}}</span>
+                                                </td>
+                                                <td>
+                                                    <span>{{item.Sex}}</span>
+                                                </td>
+                                                <td>
+                                                    <span>{{item.Religion}}</span>
+                                                </td>
+
+                                                <td>
+                                                    <span>{{item.Caste}}</span>
+                                                </td>
+                                                <td>
+                                                    <!-- <span>{{item.SupplierName}}</span> -->
+                                                    <span>{{item.Phone1}}</span>
+                                                </td>
+                                                <td>
+                                                    <span>{{item.Zodiac}}</span>
+                                                </td>
+                                                <td>
+                                                    <span>{{item.Status}}</span>
+                                                </td>
+                                                
+
+                                            </tr>
+                                            <tr>
+                                                <td colspan="12">
+                                                    <pagination-controls (pageChange)="p=$event">
+                                                    </pagination-controls>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+    <app-nav-footer></app-nav-footer>
+</div>

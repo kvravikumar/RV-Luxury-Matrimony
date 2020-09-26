@@ -1,0 +1,20 @@
+CREATE TABLE Catering (
+    ID            INTEGER       PRIMARY KEY,
+    Name          TEXT          NOT NULL
+                                UNIQUE,
+    Type          TEXT,
+    Address       TEXT          NOT NULL,
+    Phone1        TEXT          NOT NULL
+                                UNIQUE,
+    Phone2        TEXT,
+    Email         TEXT,
+    Contact       [PERSON TEXT] NOT NULL,
+    Created_Date  TEXT,
+    Created_By    TEXT,
+    Modified_Date TEXT,
+    Modified_By   TEXT
+);
+CREATE UNIQUE INDEX Index_Catering ON Catering (
+    ID,
+    Name
+);

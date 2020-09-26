@@ -1,0 +1,151 @@
+<div class="container">
+  <app-nav-Adminmenu></app-nav-Adminmenu>
+
+  <header>
+    <h2><a href="#" rel="bookmark" title="Permalink to this POST TITLE">Home</a></h2>
+  </header>
+  <form [formGroup]="UserForm" (ngSubmit)="onFormSubmit()">
+
+    <div class="row">
+      <div class="col-md-12">
+        <div class="col-md-7">
+          <div>Laxury Associates was started in 2019. The Company offers matrimonial services to India and Non Resident
+            Indian's </div><br>
+          <div><b>Types of Matrimonial Service Offered</b></div>
+          <ul>
+            <li>Luxury Associate Website</li>
+            <li>Exclusive Community</li>
+          </ul>
+          <div>In Luxury Associate Website, Members can register their information. Once confirm, members profile will
+            be
+            added in website.</div>
+          <br>
+          <div class="row">
+
+
+
+            <div class="col-md-3" style="padding-right: 5px;padding-left: 5px;">
+              <div class="panel panel-default">
+                <div class="panel-body" style="text-align: center;background-color:#f9f6f6;">
+                  <span class="CountClass">{{TotalBudgeted}} </span>
+                  <br />
+                  <span class="Countlabel">Members</span>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3" style="padding-right: 5px;padding-left: 5px;">
+              <div class="panel panel-default">
+                <div class="panel-body" style="text-align: center;background-color:#f9f6f6">
+                  <span class="CountClass">{{TotalUsed}} </span>
+                  <br />
+                  <span class="Countlabel">Happy Weddings</span>
+                </div>
+              </div>
+            </div>
+
+
+
+          </div>
+        </div>
+        <div class="col-md-5">
+
+          <div class="panel panel-primary">
+            <div class="panel-heading">Free Registration</div>
+            <div class="panel-body">
+              <div class="row">
+                <div class="col-md-12" style="text-align: right;"><span style="color: blue;">{{SuccessMassage}}</span><span
+                  style="color:red;">{{errorMessage}}</span></div>
+              </div>
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label for="Title">Title </label>
+                    <select id="form_need" class="form-control" formControlName="Title">
+                      <option value=""></option>
+                      <option value="Mr">Mr</option>
+                      <option value="Miss">Miss</option>
+                      <option value="Mrs">Mrs</option>
+                      <option value="Other">Other</option>
+                    </select>
+                    <div *ngIf="submitted && f.Title.errors" class="invalid-feedback">
+                      <div *ngIf="f.Title.errors.required" style="color:red">Title is required</div>
+                  </div>
+                  </div>
+                </div>
+                <div class="col-md-8">
+                  <div class="form-group">
+                    <label for="FullName">FullName </label>
+                    <input type="text" formControlName="FullName" class="form-control">
+                    <div *ngIf="submitted && f.FullName.errors" class="invalid-feedback">
+                      <div *ngIf="f.FullName.errors.required" style="color:red">FullName is required</div>
+                  </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="Gender">Gender </label>
+                    <select id="form_need" class="form-control" formControlName="Gender">
+                      <option value=""></option>
+                      <option value="Male">Male</option>
+                      <option value="FeMale">FeMale</option>
+                      <option value="Other">Other</option>
+                    </select>
+                    <div *ngIf="submitted && f.Gender.errors" class="invalid-feedback">
+                      <div *ngIf="f.Gender.errors.required" style="color:red">Gender is required</div>
+                  </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="Dob">Date of Birth </label>
+                    <input type="date" class="form-control" formControlName="Dob">
+
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="Email">Email ID</label>
+                    <input type="text" class="form-control" formControlName="Email">
+                    <div *ngIf="submitted && f.Email.errors" class="invalid-feedback">
+                       <div *ngIf="f.Email.errors.pattern" style="color:red">Inaild Email ID
+                                </div>
+                  </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="Phone">Phone</label>
+                    <input type="number" class="form-control" formControlName="Phone">
+                    <div *ngIf="submitted && f.Phone.errors" class="invalid-feedback">
+                      <div *ngIf="f.Phone.errors.required" style="color:red">Phone No is required</div>
+                      <div *ngIf="f.Phone.errors.pattern" style="color:red">Inaild Mobile Number
+                                </div>
+                  </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12" style="text-align: center;">
+                  <input type="submit" class="btn btn-success btn-send" value="Send message">
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+
+
+
+
+  </form>
+  <app-nav-footer></app-nav-footer>
+</div>

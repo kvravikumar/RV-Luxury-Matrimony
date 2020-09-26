@@ -1,0 +1,315 @@
+<app-nav-Adminmenu></app-nav-Adminmenu>
+
+<div class="row">
+    <div class="col-md-8"><span class="PageTitle">{{PageTitle}}</span></div>
+    <div class="col-md-4" style="text-align: right;"><span style="color: blue;">{{SuccessMassage}}</span><span
+            style="color:red;">{{errorMessage}}</span></div>
+</div>
+<div class="panel panel-default">
+    <div class="panel-body">
+        <form [formGroup]="UserForm" (ngSubmit)="onFormSubmit()">
+            <div class="form-group col-md-4" class="hidden">
+                <label for="Id">Id</label>
+                <input disabled type="text" class="form-control" id="Id" formControlName="Id">
+            </div>
+            <div class="row">
+
+
+                <div class="col-md-9">
+                    <div class="row">
+
+                        <div class="form-group col-md-4">
+                            <label for="Name">Name</label>
+                            <input type="text" class="form-control" id="Name" formControlName="Name">
+                            <div *ngIf="submitted && f.Name.errors" class="invalid-feedback">
+                                <div *ngIf="f.Name.errors.required" style="color:red">Name is required</div>
+                            </div>
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label for="Sex">Sex</label>
+                            <select class="form-control" formControlName="Sex" class="form-control">
+                                <option> </option>
+                                <option *ngFor="let sex of SexArray" value="{{sex.CodeName}}"
+                                    [disabled]="sex.Status=='I'">
+                                    {{sex.CodeDesc}} </option>
+                            </select>
+                            <div *ngIf="submitted && f.Sex.errors" class="invalid-feedback">
+                                <div *ngIf="f.Sex.errors.required" style="color:red">Sex is required</div>
+                            </div>
+                        </div>
+
+                        <div class="form-group col-md-2">
+                            <label for="Dob">Date Of Birth</label>
+                            <input type="date" class="form-control" id="Dob" formControlName="Dob">
+                            <div *ngIf="submitted && f.Dob.errors" class="invalid-feedback">
+                                <div *ngIf="f.Dob.errors.required" style="color:red">Date Of Birth is required</div>
+                            </div>
+                        </div>
+
+                        <div class="form-group col-md-2">
+                            <label for="Height">Height</label>
+                            <input type="number" class="form-control" formControlName="Height">
+                        </div>
+
+                        <div class="form-group col-md-2">
+                            <label for="Weight">Weight</label>
+                            <input type="number" class="form-control" formControlName="Weight">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-md-3">
+                            <label for="Education">Education</label>
+                            <input type="text" class="form-control" formControlName="Education">
+                        </div>
+
+
+
+                        <div class="form-group col-md-3">
+                            <label for="Profession">Profession</label>
+                            <input type="text" class="form-control" formControlName="Profession">
+                        </div>
+
+                        <div class="form-group col-md-3">
+                            <label for="Religion">Religion</label>
+                            <select class="form-control" formControlName="Religion" class="form-control">
+                                <option> </option>
+                                <option *ngFor="let Religion of ReligionArray" value="{{Religion.CodeName}}"
+                                    [disabled]="Religion.Status=='I'">
+                                    {{Religion.CodeDesc}} </option>
+                            </select>
+                        </div>
+
+                        <div class="form-group col-md-2">
+                            <label for="Caste">Caste</label>
+                            <select class="form-control" formControlName="Caste" class="form-control">
+                                <option> </option>
+                                <option *ngFor="let caste of CasteArray" value="{{caste.CodeName}}"
+                                    [disabled]="caste.Status=='I'">
+                                    {{caste.CodeDesc}} </option>
+                            </select>
+                        </div>
+
+
+
+
+
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="form-group col-md-3">
+                            <label for="FName">Father Name</label>
+                            <input type="text" class="form-control" formControlName="FName">
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="FOccupation">Occupation</label>
+                            <input type="text" class="form-control" formControlName="FOccupation">
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="FPhone">Phone</label>
+                            <input type="text" class="form-control"
+                                [ngClass]="{ 'is-invalid': submitted && f.FPhone.errors }" formControlName="FPhone">
+                            <div *ngIf="submitted && f.FPhone.errors" class="invalid-feedback">
+                                <div *ngIf="f.FPhone.errors.pattern" style="color:red">Inaild Mobile Number
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label for="FPresent">Present</label>
+                            <select id="FPresent" formControlName="FPresent" class="form-control">
+                                <option> </option>
+                                <option *ngFor="let Status of UserPresent" value="{{Status.CodeName}}">
+                                    {{Status.CodeDesc}} </option>
+                            </select>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="form-group col-md-3">
+                            <label for="MName">Mother Name</label>
+                            <input type="text" class="form-control" formControlName="MName">
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="MOccupation">Occupation</label>
+                            <input type="text" class="form-control" formControlName="MOccupation">
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="MPhone">Phone</label>
+                            <input type="text" class="form-control"
+                                [ngClass]="{ 'is-invalid': submitted && f.MPhone.errors }" formControlName="MPhone">
+                            <div *ngIf="submitted && f.MPhone.errors" class="invalid-feedback">
+                                <div *ngIf="f.MPhone.errors.pattern" style="color:red">Inaild Mobile Number
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label for="MPresent">Present</label>
+                            <select id="MPresent" formControlName="MPresent"
+                                [ngClass]="{ 'is-invalid': submitted && f.MPresent.errors }" class="form-control">
+                                <option> </option>
+                                <option *ngFor="let Status of UserPresent" value="{{Status.CodeName}}">
+                                    {{Status.CodeDesc}} </option>
+                            </select>
+                        </div>
+                        
+                    </div>
+                    <hr>
+
+
+
+                </div>
+                <div class="col-md-3">
+                    <!-- <div class="form-group col-md-12">
+                        <label for="Photo">Photo</label>
+                        <input type="text" class="form-control" formControlName="Photo">
+                    </div> -->
+                </div>
+            </div>
+            <div class="row">
+                
+
+                <div class="form-group col-md-2">
+                    <label for="Zodiac">Zodiac (ராசி)</label>
+                    <select class="form-control" formControlName="Zodiac" class="form-control">
+                        <option> </option>
+                        <option *ngFor="let Zodiac of ZodiacArray" value="{{Zodiac.CodeName}}"
+                            [disabled]="Zodiac.Status=='I'">
+                            {{Zodiac.CodeDesc}} </option>
+                    </select>
+                </div>
+                <div class="form-group col-md-2">
+                    <label for="Star">Start (நட்சத்திரம்)</label>
+                    <select id="Star" formControlName="Star"  class="form-control">
+                        <option> </option>
+                        <option *ngFor="let Status of StarArray" value="{{Status.CodeName}}">
+                            {{Status.CodeDesc}} </option>
+                    </select>
+                </div>
+
+                <div class="form-group col-md-3">
+                    <label for="Place">Place</label>
+                    <input type="text" class="form-control" formControlName="Place">
+                </div>
+
+                <div class="form-group col-md-2">
+                    <label for="Phone1">Phone1</label>
+                    <input type="text" class="form-control" formControlName="Phone1"
+                        [ngClass]="{ 'is-invalid': submitted && f.Phone1.errors }">
+                    <div *ngIf="submitted && f.Phone1.errors" class="invalid-feedback">
+                        <div *ngIf="f.Phone1.errors.required" style="color:red">Phone1 is required</div>
+                    </div>
+                    <div *ngIf="submitted && f.Phone1.errors" class="invalid-feedback">
+                        <div *ngIf="f.Phone1.errors.pattern" style="color:red">Inaild Mobile Number
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group col-md-2">
+                    <label for="Phone2">Phone2</label>
+                    <input type="text" class="form-control" formControlName="Phone2"
+                    [ngClass]="{ 'is-invalid': submitted && f.Phone2.errors }">
+                    <div *ngIf="submitted && f.Phone2.errors" class="invalid-feedback">
+                        <div *ngIf="f.Phone2.errors.pattern" style="color:red">Inaild Mobile Number
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group col-md-4">
+                    <label for="Email">Email</label>
+                    <input type="text" class="form-control" formControlName="Email"
+                    [ngClass]="{ 'is-invalid': submitted && f.Email.errors }">
+                    <div *ngIf="submitted && f.Email.errors" class="invalid-feedback">
+                        <div *ngIf="f.Email.errors.pattern" style="color:red">Inaild Email address
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group col-md-3">
+                    <label for="Address">Address</label>
+                    <textarea type="textarea" class="form-control" formControlName="Address"></textarea>
+                </div>
+
+
+                <div class="form-group col-md-2">
+                    <label for="Pincode">Pincode</label>
+                    <input type="text" class="form-control" formControlName="Pincode"
+                    [ngClass]="{ 'is-invalid': submitted && f.Pincode.errors }">
+                    <div *ngIf="submitted && f.Pincode.errors" class="invalid-feedback">
+                        <div *ngIf="f.Pincode.errors.pattern" style="color:red">Inaild Pincode                        </div>
+                    </div>
+                </div>
+                <div class="form-group col-md-2">
+                    <label for="Status">Status</label>
+                    <select class="form-control" formControlName="Status" class="form-control">
+                        <option> </option>
+                        <option *ngFor="let Status of UserStatus" value="{{Status.CodeName}}"
+                            [disabled]="Status.Status=='I'">
+                            {{Status.CodeDesc}} </option>
+                    </select>
+
+                    <div *ngIf="submitted && f.Status.errors" class="invalid-feedback">
+                        <div *ngIf="f.Status.errors.required" style="color:red">Status is required</div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-2">
+                    <label for="BloodGroup">Blood Group</label>
+                    <select id="BloodGroup" formControlName="BloodGroup"
+                        [ngClass]="{ 'is-invalid': submitted && f.BloodGroup.errors }" class="form-control">
+                        <option> </option>
+                        <option *ngFor="let Status of BloodGroupArray" value="{{Status.CodeName}}">
+                            {{Status.CodeDesc}} </option>
+                    </select>
+                </div>
+                <div class="form-group col-md-1">
+                    <label for="Brothers">Brothers</label>
+                    <input type="number" class="form-control" formControlName="Brothers">
+                </div>
+                <div class="form-group col-md-1">
+                    <label for="BMarried">B.Married</label>
+                    <input type="number" class="form-control" formControlName="BMarried">
+                </div>
+                <div class="form-group col-md-1">
+                    <label for="Sisters">Sisters</label>
+                    <input type="number" class="form-control" formControlName="Sisters">
+                </div>
+                <div class="form-group col-md-1">
+                    <label for="SMarried">S.Married</label>
+                    <input type="number" class="form-control" formControlName="SMarried">
+                </div>
+                <div class="form-group col-md-3">
+                    <!-- <label for="Horoscope">Horoscope</label>
+                    <select id="Horoscope" formControlName="MPresent"
+                        [ngClass]="{ 'is-invalid': submitted && f.Horoscope.errors }" class="form-control">
+                        <option> </option>
+                        <option *ngFor="let Status of MemberHoroscope" value="{{Status.value}}">
+                            {{Status.name}} </option>
+                    </select> -->
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-1" style="padding-top:22px;">
+                    <button type="submit" id="btnCandidateSave" style="width:90px;"
+                        class="btn btn-primary btnCandidateSave">Save</button>
+                </div>
+                <div class="form-group col-md-1" style="padding-top:22px;">
+                    <button type="test" id="btnBack" style="width:90px;" [routerLink]="'/MemberSearch'"
+                        class="btn btn-warning btnBack">Back</button>
+                </div>
+
+
+                <!-- <div class="form-group col-md-1" style="padding-top:22px;">
+                    <button type="test" id="btnDownload" (click)="downloadCSV()" style="width:90px;"
+                        class="btn btn-dark">Download</button>
+                </div> -->
+
+            </div>
+
+        </form>
+    </div>
+</div>
+<ngx-spinner bdColor="rgba(51, 51, 51, 0.8)" size="default" type="ball-spin-clockwise">
+    <p style="color:white">Processing.. </p>
+</ngx-spinner>
+<app-nav-footer></app-nav-footer>

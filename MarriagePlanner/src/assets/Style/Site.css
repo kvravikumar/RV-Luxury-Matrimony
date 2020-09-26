@@ -1,0 +1,24 @@
+﻿
+.Tabmenu{
+  background-color: #007A68;color: white;
+}
+
+.TabmenuActive{
+  background-color: #007A68;color: white;
+}
+
+table, th {
+  text-align: center;
+}
+
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+-webkit-appearance: none; 
+}
+
+input[type=number] {
+-moz-appearance: textfield;
+}
+
+
+

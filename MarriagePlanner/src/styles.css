@@ -1,0 +1,109 @@
+/* You can add global styles to this file, and also import other style files */
+
+/* Provide sufficient contrast against white background */
+a {
+  color: #0366d6;
+}
+
+code {
+  color: #e01a76;
+}
+
+.btn-primary {
+  color: #fff;
+  background-color: #1b6ec2;
+  border-color: #1861ac;
+}
+
+.btn-toolbar .btn{
+  margin-right: 5px;
+}
+.btn-toolbar .btn:last-child{
+  margin-right: 0;
+}
+.CountClass
+{
+font-weight: bold;
+font-size:large;
+}
+.Countlabel
+{
+font-weight: bold;
+
+}
+.form-control {
+  background-color: transparent;
+  border: 0px solid;
+  border-radius: 0;
+  border-bottom: 1px solid;
+}
+
+option:disabled { 
+  background: #ccc;
+  color: red 
+}
+
+.Amount
+{
+  text-align: right;
+}
+
+
+.btn-colour-Print {
+  color: #fff;
+  background-color: #7b43c0 ;
+  border-color: #7b43c0 ;
+  letter-spacing: 0.05em;
+  border-radius: 4px;
+}
+
+.btn-colour-Print:hover
+{
+  background: #7225d1 ;
+  color: #ffffff;
+}
+.btn-colour-Print:active,
+.btn-colour-Print:focus,
+.btn-colour-Print.active {
+  /* let's darken #004E64 a bit for hover effect */
+  background: #7b43c0 ;
+  color: #ffffff;
+  border-color: #7b43c0 ;
+}
+
+
+
+.btn-colour-Activity {
+  color: #fff;
+  background: linear-gradient(to right, #67b26b, #4ca2cb);
+  border-color: none ;
+  letter-spacing: 0.05em;
+  border-radius: 4px;
+}
+
+.btn-colour-Activity:hover
+{
+  background: linear-gradient(to right, #59c75e, #2fb1ee);
+  color: #ffffff;
+}
+.btn-colour-Activity:active,
+.btn-colour-Activity:focus,
+.btn-colour-Activity.active {
+  /* let's darken #004E64 a bit for hover effect */
+  background: linear-gradient(to right, #67b26b, #4ca2cb);
+  color: #ffffff;
+  border-color: none ;
+}
+
+.disableDiv{
+  pointer-events: none;
+}
+
+table,
+thead,
+tr,
+tbody,
+th,
+td {
+  text-align: left;
+}

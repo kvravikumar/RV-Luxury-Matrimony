@@ -1,0 +1,63 @@
+<div class="panel-body" style="vertical-align:bottom;">
+  <div class="col-md-4" style="text-align:left;">
+      <img class="img-responsive" width="50%" style="cursor: pointer;" [routerLink]="'/AdminDashboard'" src="assets/Images/MainLogo.jpeg" />
+
+    </div>
+  <div class="col-md-3"><span style="color: #000000;font-size: 1.0em;"  *ngIf="UserGroup=='ADMIN'"> Welcome <b> {{User_Name}}</b></span></div>
+  <div class="col-md-3"><span style="color: #000000;font-size: 1.0em;"  *ngIf="UserGroup=='ADMIN'"><span class="fa fa-clock-o"></span>&nbsp;  <countdown-timer [start]="LoginCounter"></countdown-timer></span> </div>
+  <div class="col-md-2">
+    <!-- <img class="img-responsive" src="assets/Images/Capex.png"> -->
+
+  </div>
+</div>
+
+<nav class="navbar navbar-primary">
+  <!-- <div class="container-fluid"> -->
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header" style="color:white;">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" style="color:white;"
+      data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <!-- <a class="navbar-brand" href="#"><img class="img-responsive" src="assets/Images/STL.png"></a> -->
+    <!-- <a class="navbar-brand" href="#"></a> -->
+    <a  class="navbar-brand" [routerLink]="'/AdminDashboard'" style="color:white;"><span class="fa fa-home" [routerLink]="'/AdminDashboard'" ></span></a>
+  </div>
+
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav" style="color: white;width: 90%;">
+      <li [routerLink]="'/AboutUs'" style="width: 12%;text-align:center;"><a style="cursor:pointer;">About Us </a></li>
+      <li class={{this.ReportMenuActive}} style="width: 12%;text-align:center;" class="dropdown" *ngIf="UserGroup=='ADMIN'">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+          aria-expanded="false">Search <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li><a style="cursor:pointer;" [routerLink]="'/MemberSearch'">Member Search</a></li>
+        
+        </ul>
+      </li>
+      <li class={{this.SettingsMenuActive}} style="width: 12%;text-align:center;" class="dropdown" *ngIf="UserGroup=='ADMIN'">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+          aria-expanded="false">Settings <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li><a style="cursor:pointer;" [routerLink]="'/User'">User</a></li>
+          <!-- <li><a style="cursor:pointer;" [routerLink]="'/MemberForm'">Member</a></li> -->
+          <li><a style="cursor:pointer;" [routerLink]="'/QuickCode'" >Quick Codes</a></li>
+        </ul>
+      </li>
+      <li [routerLink]="'/ContactUs'"  style="width: 12%;text-align:center;"><a style="cursor:pointer;" >Contact Us </a></li>
+    </ul>
+
+    <ul class="nav navbar-nav navbar-right" style="padding-right: 1%;">
+      <li class="nav-item" >
+        <a style="cursor:pointer;" class="nav-link text-light" [routerLink]="'/Login'" *ngIf="UserGroup=='LOGIN'" >Login</a>
+        <a style="cursor:pointer;" class="nav-link text-light" (click)="logout()" *ngIf="UserGroup=='ADMIN'" >Logout</a>
+      </li>
+    </ul>
+
+  </div><!-- /.navbar-collapse -->
+</nav>
+<session-expiration-alert [alertAt]="alertAt" [startTimer]="startTimer"></session-expiration-alert>

@@ -1,0 +1,30 @@
+<nav class="navbar navbar-primary">
+
+  <div class="navbar-header" style="color:white;">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" style="color:white;"
+      data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+
+    <a class="navbar-brand" style="color:white;"><span class="fa fa-home"
+        [routerLink]="'/AdminDashboard'"></span></a>
+  </div>
+
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav" style="color: white;width: 90%;">
+      <li style="width: 12%;text-align:center;"><a style="cursor:pointer;" [routerLink]="'/AboutUs'">About Us </a></li>
+
+
+      <li style="width: 12%;text-align:center;"><a style="cursor:pointer;" [routerLink]="'/ContactUs'">Contact Us </a>
+      </li>
+    </ul>
+
+    <ul class="nav navbar-nav navbar-right" style="padding-right: 1%;">
+
+    </ul>
+
+  </div>
+</nav>

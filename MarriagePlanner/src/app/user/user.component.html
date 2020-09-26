@@ -1,0 +1,207 @@
+<app-nav-Adminmenu></app-nav-Adminmenu>
+
+
+
+        <div class="row">
+            <div class="col-md-8"><span class="PageTitle">{{PageTitle}}</span></div>
+            <div class="col-md-4" style="text-align: right;"><span style="color: blue;">{{SuccessMassage}}</span><span
+                    style="color:red;">{{errorMessage}}</span></div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <form [formGroup]="UserForm" (ngSubmit)="onFormSubmit()">
+                    <div class="row">
+
+
+                        <div class="col-md-12">
+                            <div class="row">
+                                <div class="form-group col-md-3" class="hidden">
+                                    <label for="UserID">UserID</label>
+                                    <input type="text" class="form-control"   formControlName="UserID">
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <label for="UserName">User Name</label>
+                                    <input type="text" class="form-control"  formControlName="UserName">
+                                        <div *ngIf="submitted && f.UserName.errors" class="invalid-feedback">
+                                            <div *ngIf="f.UserName.errors.required" style="color:red">User Name is
+                                                required
+                                            </div>
+                                        </div>
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <label for="Password">Password</label>
+                                    <input type="password" class="form-control" formControlName="Password">
+                                        <div *ngIf="submitted && f.Password.errors" class="invalid-feedback">
+                                            <div *ngIf="f.Password.errors.required" style="color:red">Password is
+                                                required
+                                            </div>
+                                        </div>
+                                </div>
+                                <div class="form-group col-md-2">
+                                    <label for="UserGroup">User Group</label>
+                                    <select id="UserGroup" formControlName="UserGroup"
+                                        [ngClass]="{ 'is-invalid': submitted && f.UserGroup.errors }" class="form-control">
+                                        <option> </option>
+                                        <option *ngFor="let Group of userGroup" value="{{Group.CodeName}}">
+                                            {{Group.CodeDesc}} </option>
+                                    </select>
+                                    <div *ngIf="submitted && f.UserGroup.errors" class="invalid-feedback">
+                                        <div *ngIf="f.UserGroup.errors.required" style="color:red">User Group is
+                                            required
+                                        </div>
+                                    </div>
+                                </div>
+
+                               
+
+                                <div class="form-group col-md-2">
+                                    <label for="Status">Status</label>
+                                    <select id="Status" formControlName="Status"
+                                        [ngClass]="{ 'is-invalid': submitted && f.Status.errors }" class="form-control">
+                                        <option> </option>
+                                        <option *ngFor="let Status of UserStatus" value="{{Status.CodeName}}">
+                                            {{Status.CodeDesc}} </option>
+                                    </select>
+
+                                    <div *ngIf="submitted && f.Status.errors" class="invalid-feedback">
+                                        <div *ngIf="f.Status.errors.required" style="color:red">Status is required</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-md-1" style="padding-top:22px;">
+                                    <button type="submit" id="btnCandidateSave" style="width:90px;"
+                                        class="btn btn-primary btnCandidateSave">Save</button>
+                                </div>
+                                <div class="form-group col-md-1" style="padding-top:22px;">
+                                    <button type="test" id="btnBack" (click)="onBack()" style="width:90px;"
+                                        class="btn btn-warning btnBack">Home</button>
+                                </div>
+                                <div class="form-group col-md-1" style="padding-top:22px;">
+                                    <button type="test" id="btnDownload" (click)="downloadCSV()" style="width:90px;"
+                                        class="btn btn-dark">Download</button>
+                                    <!-- <button (click)="downloadCSV()" class="btn-default">Download CSV</button> -->
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="row">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="row" *ngIf="mode=='New'">
+                        <form [formGroup]="UserSearchForm">
+                            <div class="col-md-8"></div>
+                            <div class="col-md-1">Search</div>
+                            <div class="col-md-3"> <input type="text" class="form-control" (keyup)="onUserSearch()"
+                                    formControlName="SearchValue"></div>
+                        </form><br><br>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div>
+    
+                                <div class="table-responsive">
+    
+                                    <table class="table table-striped table-sm hover" style="width:100%">
+                                        <thead class="bg-primary" style="height:2px">
+                                            <tr>
+                                                <th width="1%"></th>
+                                                <th width="1%"></th>
+                                                <th hidden style="text-align: left;">UserID</th>
+                                                <th style="text-align: left;">UserName</th>
+                                                <!-- <th style="text-align: left;">Password</th> -->
+                                                <th>UserGroup</th>
+                                                <th>Status</th>
+                                                <th>CreatedBy</th>
+    
+                                            </tr>
+                                        </thead>
+    
+                                        <tbody>
+                                            <tr
+                                                *ngFor="let item of ItemsArray | paginate:{itemsPerPage: pagecount, currentPage:p} let i = index">
+                                                <td>
+                                                    <button [disabled]="item.inedit" class="btn btn-warning"
+                                                        (click)="onEditClick($event, ((p-1)*pagecount)+i,Errortemplate)"
+                                                        data-toggle="modal" data-target="#editModal"><span
+                                                            class="fa fa-edit"></span></button>
+    
+                                                </td>
+                                                <td>
+                                                    <button [disabled]="!item.inedit" class="btn btn-danger"
+                                                        (click)="onCancelClick(((p-1)*pagecount)+i)" data-toggle="modal"
+                                                        data-target="#editModal"><span class="fa fa-times"></span></button>
+                                                </td>
+                                                <td hidden style="text-align: left;">
+                                                    <span>{{item.UserId}}</span>
+                                                </td>
+    
+                                                <td style="text-align: left;">
+                                                    <span>{{item.UserName}}</span>
+                                                </td>
+                                                <!-- <td style="text-align: left;">
+                                                <span>{{item.Dept}}</span>
+                                            </td> -->
+                                                <!-- <td style="text-align: left;">
+                                                    <span>{{item.Password}}</span>
+                                                </td> -->
+                                                <td style="text-align: left;">
+                                                    <span>{{item.UserGroup}}</span>
+                                                </td>
+                                                <td>
+                                                    <span>{{item.Status}}</span>
+                                                </td>
+                                                <td>
+                                                    <span>{{item.CreatedBy}}</span>
+                                                </td>
+    
+                                            </tr>
+                                            <tr>
+                                                <td colspan="12">
+                                                    <pagination-controls (pageChange)="p=$event"></pagination-controls>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+    
+        <ng-template #Errortemplate>
+            <div class="modal-header bg-primary ">
+                <h4 class="modal-title pull-left">User</h4>
+                <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-1"><i class="fa fa-times-circle" style="font-size:48px;color:red"></i></div>
+                    <div class="col-md-11" style="padding-top: 3px;">
+                        <h5>{{PopupErrorMessage}}</h5>
+                    </div>
+    
+                </div>
+    
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-dark" (click)="modalRef.hide()">Ok</button>
+            </div>
+    
+        </ng-template>
+
+
+
+  
+<app-nav-footer></app-nav-footer>

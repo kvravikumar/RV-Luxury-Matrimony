@@ -1,0 +1,82 @@
+<div class="container">
+  <app-nav-Adminmenu></app-nav-Adminmenu>
+<div>
+  <!-- <div> -->
+  <div class="row">
+    <div class="col-md-2">
+      <ngx-spinner bdColor="rgba(51, 51, 51, 0.8)" size="default" type="ball-spin-clockwise">
+        <p style="color:white">Processing.. </p>
+      </ngx-spinner>
+    </div>
+
+
+  </div>
+ 
+  <div class="row">
+
+    <div class=" col-md-4"></div>
+    <div class=" col-md-4" style="padding-top:5%;">
+
+      <form [formGroup]="angForm" novalidate (ngSubmit)="login()" #f="ngForm">
+        <div class="panel panel-default">
+          <div class="panel-body" style="padding-left:10%;padding-right:10%">
+
+            <h1 class="h3 mb-3 font-weight-normal" style="text-align: center;font-weight: bold;"> Welcome</h1>
+            <div class="row">
+              <input type="text" [(ngModel)]="model.UserName" class="form-control " formControlName="UserName"
+                placeholder="User Name"><br />
+              <input type="password" name="Passward" [(ngModel)]="model.Password" formControlName="Passward"
+                class="form-control" placeholder="Password">
+
+              <!--<a href="#" id="forgot_pswd">Forgot password?</a>-->
+            </div>
+            <div class="row">
+              <br />
+              <button type="submit" [disabled]="angForm.pristine || angForm.invalid" class="btn btn-primary"
+                style="width:100%">Sign In</button>
+            </div>
+            <div class="row">
+              <div *ngIf="submitted && f.UserName.errors" class="invalid-feedback">
+                <div *ngIf="f.Name.UserName.required" style="color:red">UserName is required</div>
+                <div *ngIf="f.Name.UserName.minlength" style="color:red">User Name at least minimum 3 character.</div>
+            </div>
+              
+              <p style="color:#E92626;font-size:15px;font-weight:normal" Class="success" align="left">
+                {{errorMessage}}
+              </p>
+            </div>
+
+          
+            <div class="row">
+              <div class="STL" style="text-align:center;">
+                <label style="text-align:center;font-size:12px;font-weight:normal">
+                  <font color="#00000"> Luxury Associates. All Rights Reserved </font>
+                </label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="STL" style="text-align:center;">
+                <label style="text-align:center;font-size:12px;font-weight:normal">
+                  <font color="#081776">Compatible with Internet Explorer version 10 and above or Chrome</font>
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+
+    </div>
+    <div class=" col-md-1"></div>
+  </div>
+  <div class="row" style="padding-top:5%;padding-left:10%;padding-right:10%;text-align: center;">
+
+    <span style="font-size: 1.5em;"> To make your profile reach maximum number Alliance </span><br>
+    <span style="font-size: 2.5em;color: mediumvioletred;"> Register in Luxury Associates</span>
+    <br><br>
+
+  </div>
+
+<!-- 
+  <div class="row" style="padding-top: 40%;"></div> -->
+</div>
+</div>
