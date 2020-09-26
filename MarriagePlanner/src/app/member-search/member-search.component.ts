@@ -79,6 +79,8 @@ export class MemberSearchComponent implements OnInit {
 
     ngOnInit() {
 
+      this.PageTitle="Member Search";
+
     this.UserForm = new FormGroup({
       Name: new FormControl(),
       Sex: new FormControl(),

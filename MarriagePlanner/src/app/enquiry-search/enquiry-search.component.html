@@ -1,1 +1,162 @@
-<p>enquiry-search works!</p>
+<div class="container">
+    <app-nav-Adminmenu></app-nav-Adminmenu>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-md-2"><span class="PageTitle">{{PageTitle}}</span></div>
+            <div class="col-md-2">
+                <ngx-spinner bdColor="rgba(51, 51, 51, 0.8)" size="default" type="ball-spin-clockwise">
+                    <p style="color:white">Processing.. </p>
+                </ngx-spinner>
+            </div>
+
+            <div class="col-md-8" style="text-align: right;"><span style="color: blue;">{{SuccessMassage}}</span><span
+                    style="color:red;">{{errorMessage}}</span></div>
+        </div>
+        <div class="panel panel-default">
+            <form [formGroup]="UserForm" (ngSubmit)="onFormSubmit()">
+                <div class="panel-body">
+                   <div class="row">
+                        <br>
+                        <div class="col-md-12">
+                            <div class="row">
+                                <div class="form-group col-md-3">
+                                    <label for="Title">Title</label>
+                                    <select id="form_need" class="form-control" formControlName="Title">
+                                        <option value=""></option>
+                                        <option value="Mr">Mr</option>
+                                        <option value="Miss">Miss</option>
+                                        <option value="Mrs">Mrs</option>
+                                        <option value="Other">Other</option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-2">
+                                    <label for="FullName">FullName</label>
+                                    <input type="text" class="form-control" formControlName="FullName">
+                                </div>
+                                <div class="form-group col-md-2">
+                                    <label for="Gender">Gender</label>
+                                    <select id="form_need" class="form-control" formControlName="Gender">
+                                        <option value=""></option>
+                                        <option value="Male">Male</option>
+                                        <option value="FeMale">FeMale</option>
+                                        <option value="Other">Other</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group col-md-2">
+                                    <label for="Email">Email</label>
+                                    <input type="text" class="form-control" formControlName="Email">
+                                </div>
+                                <div class="form-group col-md-2">
+                                    <label for="Phone">Phone</label>
+                                    <input type="text" class="form-control" formControlName="Phone">
+                                </div>
+
+
+                            </div>
+                            <div class="row">
+
+
+
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-md-5">
+                        </div>
+                        <div class="form-group col-md-1" style="padding-top:22px;">
+                            <button type="button" style="width:90px;" class="btn btn-primary"
+                                (click)="onSearch()">Search</button>
+                        </div>
+
+                        <div class="form-group col-md-1" style="padding-top:22px;" *ngIf="this.isDownload">
+                            <button type="button" (click)="downloadCSV()" style="width:90px;"
+                                class="btn btn-dark">Download</button>
+                        </div>
+                        <div class="form-group col-md-1" style="padding-top:22px;">
+                            <button type="button" (click)="onBack()" style="width:90px;"
+                                class="btn btn-warning ">Home</button>
+                        </div>
+
+
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="table-responsive">
+
+                                <table class="table table-striped table-sm hover" style="width:100%">
+                                    <thead class="bg-primary">
+                                        <tr>
+                                            <th></th>
+
+                                            <!--<th width="10%"></th>-->
+                                            <th>Title</th>
+                                            <th>FullName</th>
+                                            <th>Gender</th>
+                                            <th>DOB</th>
+                                            <th>Email</th>
+                                            <th>Phone</th>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody>
+                                        <tr
+                                            *ngFor="let item of ItemsArray | paginate:{itemsPerPage: pagecount, currentPage:p} let i = index">
+                                            <td>
+                                                <button [disabled]="item.inedit" class="btn btn-warning"
+                                                    (click)="onEditClick($event, ((p-1)*pagecount)+i)"
+                                                    data-toggle="modal" data-target="#editModal"><span
+                                                        class="fa fa-edit"></span></button>
+
+                                            </td>
+
+
+                                            <td>
+                                                <span>{{item.Title}}</span>
+                                            </td>
+                                            <td>
+                                                <span>{{item.FullName}}</span>
+                                            </td>
+                                            <td>
+                                                <span>{{item.Gender}}</span>
+                                            </td>
+                                            <td>
+                                                <span>{{item.Dob}}</span>
+                                            </td>
+
+                                            <td>
+                                                <span>{{item.email}}</span>
+                                            </td>
+                                            <td>
+                                                <!-- <span>{{item.SupplierName}}</span> -->
+                                                <span>{{item.Phone}}</span>
+                                            </td>
+
+
+
+                                        </tr>
+                                        <tr>
+                                            <td colspan="12">
+                                                <pagination-controls (pageChange)="p=$event">
+                                                </pagination-controls>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+    <app-nav-footer></app-nav-footer>
+</div>

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { MemberService } from '../services/Member.service'
 import { LoginService } from '../services/login.service'
 import { User } from '../User';
+import { List } from 'linqts';
 import { QuickCodeService } from '../services/QuickCode.Services';
 import { FormGroup, Validators, FormControl } from '@angular/forms';
 import { NgxSpinnerService } from "ngx-spinner"
@@ -44,6 +45,7 @@ export class MemberFormComponent {
   MemberBloodGroup=[];
   SupplierStatus=[];
   BloodGroupArray=[];
+  StarArray=[];
   p: number = 1;
   pagecount: number = 5;
   mode: string;
@@ -103,6 +105,7 @@ export class MemberFormComponent {
       Pincode: new FormControl('',[Validators.pattern(/^[0-9]\d{5}$/)]),
       BloodGroup: new FormControl(),
       Zodiac: new FormControl(),
+      Star: new FormControl(),
       FName: new FormControl(),
       FOccupation: new FormControl(),
       FPhone: new FormControl('',[Validators.pattern(/^[0-9]\d{9}$/)]),
@@ -380,6 +383,22 @@ export class MemberFormComponent {
     })
   }
 
+  getStar(zodia:string) {
+    this.QuickCodeService.GetByType("STAR").subscribe((result: any) => {
+
+      if (result.status == "success") {
+       const arr = new List<any>(result.data).Where(x => x.Remarks == this.UserForm.value.Zodiac)
+
+        this.StarArray=arr.ToArray();
+      }
+      else {
+        this.SuccessMassage = '';
+        this.errorMessage = result.message;
+      }
+
+    })
+  }
+
   getReligion() {
     this.QuickCodeService.GetByType("RELIGION").subscribe((result: any) => {
 
@@ -419,5 +438,8 @@ export class MemberFormComponent {
 
     })
   }
-
+  ChangeZodia()
+  {
+    this.getStar(this.UserForm.value.Zodiac);
+  }
 }

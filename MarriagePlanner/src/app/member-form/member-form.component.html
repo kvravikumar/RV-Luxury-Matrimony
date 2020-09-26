@@ -170,7 +170,7 @@
 
                 <div class="form-group col-md-2">
                     <label for="Zodiac">Zodiac (ராசி)</label>
-                    <select class="form-control" formControlName="Zodiac" class="form-control">
+                    <select class="form-control" formControlName="Zodiac" class="form-control"(change)="ChangeZodia()" >
                         <option> </option>
                         <option *ngFor="let Zodiac of ZodiacArray" value="{{Zodiac.CodeName}}"
                             [disabled]="Zodiac.Status=='I'">

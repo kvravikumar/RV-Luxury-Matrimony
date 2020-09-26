@@ -41,7 +41,7 @@ import { AboutUsComponent } from './about-us/about-us.component';
 import { ContactUsComponent } from './contact-us/contact-us.component';
 import { MemberSearchComponent } from './member-search/member-search.component';
 import { MemberFormComponent } from './member-form/member-form.component';
-import { EnquirySearchComponent } from './enquiry-search/enquiry-search.component';
+import { EnquirySearchComponent } from './enquiry-search/enquiry-search.component'
 
 export const options: Partial<IConfig> = {
   thousandSeparator: "'"
@@ -87,6 +87,7 @@ export const options: Partial<IConfig> = {
       { path: 'ContactUs', component: ContactUsComponent },
       { path: 'MemberForm', component: MemberFormComponent },
       { path: 'MemberSearch', component: MemberSearchComponent },
+      { path: 'EnquirySearch', component: EnquirySearchComponent },
 
     ])
   ],
